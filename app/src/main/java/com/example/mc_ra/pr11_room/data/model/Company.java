@@ -2,10 +2,15 @@ package com.example.mc_ra.pr11_room.data.model;
 
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.databinding.BaseObservable;
+
+import com.example.mc_ra.pr11_room.R;
+import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 @Entity
-public class Company {
+public class Company  extends BaseObservable implements RecyclerBindingAdapter.ViewModel {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
@@ -17,6 +22,17 @@ public class Company {
     private String contactName;
 
     public Company() {
+    }
+
+    public Company(long id, String name, String CIF, String address, String phone, String mail, String url, String contactName) {
+        this.id = id;
+        this.name = name;
+        this.CIF = CIF;
+        this.address = address;
+        this.phone = phone;
+        this.mail = mail;
+        this.url = url;
+        this.contactName = contactName;
     }
 
     public long getId() {
@@ -83,5 +99,9 @@ public class Company {
         this.contactName = contactName;
     }
 
-
+    @Ignore
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_company_item;
+    }
 }

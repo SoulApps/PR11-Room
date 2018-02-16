@@ -23,6 +23,8 @@ public class MainActivityViewModel extends ViewModel{
     public LiveData<List<Company>> getCompanies() {
         if (companies == null) {
             companies = repository.getCompanies();
+            repository.addCompany(new Company(1,"Baldomero Empresa", "1234567", "Calle de la tortura",
+                    "666888666","ramon.guardi@gj.com","https://static.seekingalpha.com/uploads/2017/10/11/48168758-15077295111917353_origin.png","Baldomero"));
         }
         return companies;
     }
