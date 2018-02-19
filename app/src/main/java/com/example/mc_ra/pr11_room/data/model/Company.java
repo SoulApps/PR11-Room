@@ -5,12 +5,14 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BaseObservable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.example.mc_ra.pr11_room.R;
 import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 @Entity
-public class Company  extends BaseObservable implements RecyclerBindingAdapter.ViewModel {
+public class Company  extends BaseObservable implements RecyclerBindingAdapter.ViewModel, Parcelable {
     @PrimaryKey(autoGenerate = true)
     private long id;
     private String name;
@@ -104,4 +106,44 @@ public class Company  extends BaseObservable implements RecyclerBindingAdapter.V
     public int getLayoutId() {
         return R.layout.fragment_company_item;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.CIF);
+        dest.writeString(this.address);
+        dest.writeString(this.phone);
+        dest.writeString(this.mail);
+        dest.writeString(this.url);
+        dest.writeString(this.contactName);
+    }
+
+    protected Company(Parcel in) {
+        this.id = in.readLong();
+        this.name = in.readString();
+        this.CIF = in.readString();
+        this.address = in.readString();
+        this.phone = in.readString();
+        this.mail = in.readString();
+        this.url = in.readString();
+        this.contactName = in.readString();
+    }
+
+    public static final Parcelable.Creator<Company> CREATOR = new Parcelable.Creator<Company>() {
+        @Override
+        public Company createFromParcel(Parcel source) {
+            return new Company(source);
+        }
+
+        @Override
+        public Company[] newArray(int size) {
+            return new Company[size];
+        }
+    };
 }

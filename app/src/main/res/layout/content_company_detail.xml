@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.example.mc_ra.pr11_room.data.model.Company"/>
+        <variable
+            name="item"
+            type="com.example.mc_ra.pr11_room.data.model.Company"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/content_company_detail_constraintLayoutParent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.example.mc_ra.pr11_room.ui.company.CompanyDetailActivity"
         tools:showIn="@layout/activity_company_detail">
@@ -22,6 +26,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:text="@={item.name}"
             android:hint="Company Name"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +40,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="@={item.CIF}"
             android:ems="10"
             android:hint="CIF"
             android:inputType="textPersonName"
@@ -49,6 +55,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="@={item.address}"
             android:ems="10"
             android:hint="Address"
             android:inputType="textPostalAddress"
@@ -63,6 +70,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="@={item.phone}"
             android:ems="10"
             android:hint="Phone"
             android:inputType="phone"
@@ -78,6 +86,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:text="@={item.mail}"
             android:hint="Mail"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +101,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:text="@={item.url}"
             android:hint="URL logo"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,6 +116,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:text="@={item.contactName}"
             android:hint="Contact Person "
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"

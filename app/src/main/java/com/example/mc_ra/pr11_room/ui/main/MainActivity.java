@@ -2,6 +2,7 @@ package com.example.mc_ra.pr11_room.ui.main;
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,11 +14,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mc_ra.pr11_room.R;
+import com.example.mc_ra.pr11_room.ui.company.CompanyDetailActivity;
 import com.example.mc_ra.pr11_room.ui.company.CompanyListFragment;
 import com.example.mc_ra.pr11_room.utils.FragmentUtils;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG_COMPANY_FRAGMENT = "TAG_COMPANY_FRAGMENT";
+    private static final int EXTRA_RC = 2;
     private MainActivityViewModel mViewModel;
     // todo solve load error
 
@@ -27,13 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loadFragment();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab.setOnClickListener(view -> createNewCompany());
+    }
+
+    private void createNewCompany() {
+        CompanyDetailActivity.startForCreateCompany(this,EXTRA_RC);
     }
 
     private void loadFragment() {

@@ -3,6 +3,7 @@ package com.example.mc_ra.pr11_room.ui.company;
 
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,14 +21,18 @@ import com.example.mc_ra.pr11_room.data.RepositoryImpl;
 import com.example.mc_ra.pr11_room.data.model.Company;
 import com.example.mc_ra.pr11_room.databinding.FragmentCompanyListBinding;
 import com.example.mc_ra.pr11_room.ui.main.MainActivityViewModel;
+import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 import java.util.List;
 
-public class CompanyListFragment extends Fragment {
+public class CompanyListFragment extends Fragment implements RecyclerBindingAdapter.OnItemClickListener
+        ,RecyclerBindingAdapter.OnItemLongClickListener{
 
     private CompanyListAdapter mAdapter;
     private MainActivityViewModel mViewModel;
     Repository repository;
+    private final int EXTRA_RC = 1;
+    private final String COMPANY_EXTRA = "COMPANY_EXTRA";
 
     public CompanyListFragment() {
     }
@@ -66,4 +71,18 @@ public class CompanyListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public void onItemClick(View view, Object item, int position) {
+        sendToDetailActivity((Company) item);
+    }
+
+    private void sendToDetailActivity(Company item) {
+        Intent intent = new Intent();
+        intent.putExtra(COMPANY_EXTRA, item);
+        CompanyDetailActivity.startForResult(getActivity(),EXTRA_RC, item);
+    }
+    @Override
+    public void onItemLongClick(View view, Object item, int position) {
+
+    }
 }
