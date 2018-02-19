@@ -25,7 +25,7 @@ public class RecyclerBindingAdapter<T extends RecyclerBindingAdapter.ViewModel>
         int getLayoutId();
     }
 
-    public interface OnItemClickListener {
+    public interface OnItemClickListener{
         void onItemClick(View view, Object item, int position);
     }
 

@@ -9,9 +9,5 @@
         android:id="@+id/activity_main_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="0dp"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        android:paddingTop="0dp"
-        android:touchscreenBlocksFocus="false"/>
+        android:touchscreenBlocksFocus="false" />
 </layout>

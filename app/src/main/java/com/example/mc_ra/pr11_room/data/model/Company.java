@@ -24,7 +24,7 @@ public class Company  extends BaseObservable implements RecyclerBindingAdapter.V
     public Company() {
     }
 
-    public Company(long id, String name, String CIF, String address, String phone, String mail, String url, String contactName) {
+    public Company(String name, String CIF, String address, String phone, String mail, String url, String contactName) {
         this.id = id;
         this.name = name;
         this.CIF = CIF;

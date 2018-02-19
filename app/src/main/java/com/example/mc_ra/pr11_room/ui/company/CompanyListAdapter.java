@@ -12,7 +12,7 @@ import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 public class CompanyListAdapter extends RecyclerBindingAdapter<Company>{
 
     private final int modelBRId;
-
+    // todo copy paste
     public static final DiffCallback<Company> DIFF_CALLBACK = new DiffCallback<Company>() {
         @Override
         public boolean areItemsTheSame(@NonNull Company oldStudent, @NonNull Company newStudent) {
