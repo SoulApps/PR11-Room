@@ -12,17 +12,19 @@ import com.example.mc_ra.pr11_room.data.model.Company;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 @Dao
 public interface CompanyDao {
 
     @Insert
-    long insertCompany(Company company);
+    LiveData<Long> insertCompany(Company company);
 
     @Update
-    int updateCompany(Company company);
+    LiveData<Integer> updateCompany(Company company);
 
     @Delete
-    int deleteCompany(Company company);
+    LiveData<Integer> deleteCompany(Company company);
 
     @Query("SELECT * FROM Company where id = :companyId")
     LiveData<Company> getCompany(long companyId);

@@ -25,6 +25,9 @@ import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 public class CompanyListFragment extends Fragment implements RecyclerBindingAdapter.OnItemClickListener
         ,RecyclerBindingAdapter.OnItemLongClickListener{
 

@@ -14,6 +14,8 @@ import com.example.mc_ra.pr11_room.utils.DatabaseUtils;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 /**
  * Created by Mc_Ra on 14/02/2018.
  */
@@ -53,17 +55,17 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public long addCompany(Company company) {
+    public LiveData<Long> addCompany(Company company) {
         return db.companyDao().insertCompany(company);
     }
 
     @Override
-    public int updateCompany(Company company) {
+    public LiveData<Integer> updateCompany(Company company) {
         return db.companyDao().updateCompany(company);
     }
 
     @Override
-    public int deleteCompany(Company company) {
+    public LiveData<Integer> deleteCompany(Company company) {
         return db.companyDao().deleteCompany(company);
     }
 }

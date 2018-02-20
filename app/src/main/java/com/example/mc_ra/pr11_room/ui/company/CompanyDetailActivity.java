@@ -1,6 +1,7 @@
 package com.example.mc_ra.pr11_room.ui.company;
 
 import android.app.Activity;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -19,6 +20,8 @@ import com.example.mc_ra.pr11_room.data.model.Company;
 import com.example.mc_ra.pr11_room.databinding.ActivityCompanyDetailBinding;
 import com.example.mc_ra.pr11_room.ui.main.MainActivityViewModel;
 import com.example.mc_ra.pr11_room.utils.ValidationUtils;
+
+import io.reactivex.Single;
 
 public class CompanyDetailActivity extends AppCompatActivity {
     private static final int EXTRA_RC = 1;
@@ -42,7 +45,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_company_detail);
         intent = getIntent();
-        mBinding.fab.setOnClickListener(view -> manageCompany(company));
+        mBinding.companyDetailFab.setOnClickListener(view -> manageCompany(company));
         checkData(intent);
         obtainDBData();
         mBinding.setItem(company);
@@ -70,7 +73,7 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private void manageCompany(Company comp) {
         if (comp == null && !hasData) {
             // if company is null, we will create a new one
-            if(!ValidationUtils.checkEmpty(mBinding)){
+            if(ValidationUtils.checkEmpty(mBinding)){
                 // If texts are not empty and validated
                 comp = new Company(mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtCpmpanyName.getText().toString(),
                         mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtCIF.getText().toString(),
@@ -90,14 +93,10 @@ public class CompanyDetailActivity extends AppCompatActivity {
     }
 
     private void insertCompany(Company comp) {
-        mRepository.addCompany(comp);
+        Single<LiveData<Long>> result = Single.create(emitter -> emitter.onSuccess(mRepository.addCompany(comp)));
     }
 
 
-    private void initViews(Bundle savedInstanceState) {
-
-
-    }
 
 
     // Método estático para iniciar la actividad (esperando un resultado).
