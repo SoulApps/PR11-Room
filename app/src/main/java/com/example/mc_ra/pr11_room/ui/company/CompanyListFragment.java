@@ -71,6 +71,13 @@ public class CompanyListFragment extends Fragment {
         binding.companyList.addItemDecoration(new DividerItemDecoration(inflater.getContext(),DividerItemDecoration.VERTICAL));
         mViewModel.getCompanies().observe(this, this::update);
         mAdapter.setEmptyView(emptyView);
+        // TODO
+        mAdapter.setOnItemClickListener(new RecyclerBindingAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, Object item, int position) {
+
+            }
+        });
         return binding.getRoot();
     }
 

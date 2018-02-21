@@ -1,10 +1,13 @@
 package com.example.mc_ra.pr11_room.utils;
 
 
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.recyclerview.extensions.DiffCallback;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.view.LayoutInflater;
@@ -123,5 +126,41 @@ public class RecyclerBindingAdapter<T extends RecyclerBindingAdapter.ViewModel>
             binding.executePendingBindings();
         }
 
+    }
+
+    @BindingAdapter("app:dividerItemDecoration")
+    public static void setDividerItemDecoration(RecyclerView recyclerView,
+                                                Boolean dividerItemDecoration) {
+        if (recyclerView != null && dividerItemDecoration) {
+            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                    LinearLayoutManager.VERTICAL));
+        }
+    }
+
+    @BindingAdapter("app:onItemClick")
+    public static void onItemClick(RecyclerView recyclerView,
+                                   final RecyclerBindingAdapter.OnItemClickListener action) {
+        if (recyclerView != null && recyclerView.getAdapter() instanceof RecyclerBindingAdapter) {
+            RecyclerBindingAdapter adapter = (RecyclerBindingAdapter) recyclerView.getAdapter();
+            adapter.setOnItemClickListener(action);
+        }
+    }
+
+    @BindingAdapter("app:onItemLongClick")
+    public static void onItemLongClick(RecyclerView recyclerView,
+                                       final RecyclerBindingAdapter.OnItemLongClickListener action) {
+        if (recyclerView != null && recyclerView.getAdapter() instanceof RecyclerBindingAdapter) {
+            RecyclerBindingAdapter adapter = (RecyclerBindingAdapter) recyclerView.getAdapter();
+            adapter.setOnItemLongClickListener(action);
+        }
+    }
+
+    @BindingAdapter("app:emptyView")
+    public static void addEmptyView(RecyclerView recyclerView, View emptyView) {
+        if (recyclerView != null && emptyView != null
+                && recyclerView.getAdapter() instanceof RecyclerBindingAdapter) {
+            RecyclerBindingAdapter adapter = (RecyclerBindingAdapter) recyclerView.getAdapter();
+            adapter.setEmptyView(emptyView);
+        }
     }
 }
