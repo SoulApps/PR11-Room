@@ -22,6 +22,8 @@ import com.example.mc_ra.pr11_room.ui.main.MainActivityViewModel;
 import com.example.mc_ra.pr11_room.utils.ValidationUtils;
 
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class CompanyDetailActivity extends AppCompatActivity {
     private static final int EXTRA_RC = 1;
@@ -34,7 +36,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
     //todo traducir
     // todo comentar codigo
     // todo limpiar codigo
-    // todo insertar
     // todo eliminar
     // todo editar
     // todo emptyView
@@ -84,7 +85,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
                         mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtContact.getText().toString());
                 company = comp;
                 insertCompany(comp);
-                this.finish();
             }
         } else {
             // else we will edit the user
@@ -93,11 +93,16 @@ public class CompanyDetailActivity extends AppCompatActivity {
     }
 
     private void insertCompany(Company comp) {
-        Single<LiveData<Long>> result = Single.create(emitter -> emitter.onSuccess(mRepository.addCompany(comp)));
+       Single<Long> result = Single.create(emitter -> emitter.onSuccess(mRepository.addCompany(comp)));
+       result.observeOn(AndroidSchedulers.mainThread()).
+               subscribeOn(Schedulers.io()).
+               subscribe(this::checkInsert);
     }
 
 
-
+    private void checkInsert(long result){
+        this.finish();
+    }
 
     // Método estático para iniciar la actividad (esperando un resultado).
     public static void startForResult(Activity activity, int requestCode, Company company) {

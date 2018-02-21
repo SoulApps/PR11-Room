@@ -15,7 +15,7 @@ import io.reactivex.Observable;
 public interface Repository {
     LiveData<List<Company>> getCompanies();
     LiveData<Company> getCompany(long companyId);
-    LiveData<Long> addCompany(Company company);
-    LiveData<Integer> updateCompany(Company company);
-    LiveData<Integer> deleteCompany(Company company);
+    long addCompany(Company company);
+    int updateCompany(Company company);
+    int deleteCompany(Company company);
 }

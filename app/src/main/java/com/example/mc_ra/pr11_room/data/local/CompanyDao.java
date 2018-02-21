@@ -18,13 +18,13 @@ import io.reactivex.Observable;
 public interface CompanyDao {
 
     @Insert
-    LiveData<Long> insertCompany(Company company);
+    long insertCompany(Company company);
 
     @Update
-    LiveData<Integer> updateCompany(Company company);
+    int updateCompany(Company company);
 
     @Delete
-    LiveData<Integer> deleteCompany(Company company);
+    int deleteCompany(Company company);
 
     @Query("SELECT * FROM Company where id = :companyId")
     LiveData<Company> getCompany(long companyId);

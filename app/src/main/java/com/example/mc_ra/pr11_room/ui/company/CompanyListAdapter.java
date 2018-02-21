@@ -10,7 +10,7 @@ import com.example.mc_ra.pr11_room.data.model.Company;
 import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 @SuppressWarnings("unused")
-public class CompanyListAdapter extends RecyclerBindingAdapter<Company> {
+public class CompanyListAdapter extends RecyclerBindingAdapter<Company>{
 
     private final int modelBRId;
     // todo copy paste
@@ -31,6 +31,4 @@ public class CompanyListAdapter extends RecyclerBindingAdapter<Company> {
         super(modelBRId, DIFF_CALLBACK);
         this.modelBRId = modelBRId;
     }
-
-
 }

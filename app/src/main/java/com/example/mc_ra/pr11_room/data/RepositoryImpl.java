@@ -55,17 +55,17 @@ public class RepositoryImpl implements Repository{
     }
 
     @Override
-    public LiveData<Long> addCompany(Company company) {
+    public long addCompany(Company company) {
         return db.companyDao().insertCompany(company);
     }
 
     @Override
-    public LiveData<Integer> updateCompany(Company company) {
+    public int updateCompany(Company company) {
         return db.companyDao().updateCompany(company);
     }
 
     @Override
-    public LiveData<Integer> deleteCompany(Company company) {
+    public int deleteCompany(Company company) {
         return db.companyDao().deleteCompany(company);
     }
 }
