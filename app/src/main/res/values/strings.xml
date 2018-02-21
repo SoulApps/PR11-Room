@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">PR11-Room</string>
+    <string name="app_name">Company Manager</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_company_detail">CompanyDetailActivity</string>
+    <string name="title_activity_company_detail">Company</string>
+    <string name="company_image_contentDescription">Company image</string>
+    <string name="company_detail_content_txtURLHint">URL logo</string>
+    <string name="company_detail_content_txtEmailHint">Mail</string>
+    <string name="company_detail_content_txtPhoneHint">Phone</string>
+    <string name="company_detail_content_txtAddress">Address</string>
+    <string name="company_detail_content_txtCIFHint">CIF</string>
+    <string name="company_detail_content_txtCompanyNameHint">Company Name</string>
+    <string name="company_detail_content_txtContactHint">Contact Person</string>
+    <string name="empty_view_EmptyText">Sorry, but there is no companies on the list. Please, add a new company</string>
 </resources>

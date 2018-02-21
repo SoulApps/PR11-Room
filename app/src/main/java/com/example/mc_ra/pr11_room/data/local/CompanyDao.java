@@ -26,8 +26,6 @@ public interface CompanyDao {
     @Delete
     int deleteCompany(Company company);
 
-    @Query("SELECT * FROM Company where id = :companyId")
-    LiveData<Company> getCompany(long companyId);
 
     @Query("SELECT * FROM Company ORDER BY name")
     LiveData<List<Company>> getCompanies();

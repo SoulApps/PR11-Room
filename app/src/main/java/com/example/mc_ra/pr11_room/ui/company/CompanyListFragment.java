@@ -15,16 +15,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mc_ra.pr11_room.BR;
 import com.example.mc_ra.pr11_room.R;
 import com.example.mc_ra.pr11_room.data.Repository;
+import com.example.mc_ra.pr11_room.data.RepositoryImpl;
 import com.example.mc_ra.pr11_room.data.model.Company;
 import com.example.mc_ra.pr11_room.databinding.FragmentCompanyListBinding;
 import com.example.mc_ra.pr11_room.ui.main.MainActivityViewModel;
 import com.example.mc_ra.pr11_room.utils.RecyclerBindingAdapter;
 
 import java.util.List;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class CompanyListFragment extends Fragment {
@@ -71,13 +77,7 @@ public class CompanyListFragment extends Fragment {
         binding.companyList.addItemDecoration(new DividerItemDecoration(inflater.getContext(),DividerItemDecoration.VERTICAL));
         mViewModel.getCompanies().observe(this, this::update);
         mAdapter.setEmptyView(emptyView);
-        // TODO
-        mAdapter.setOnItemClickListener(new RecyclerBindingAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, Object item, int position) {
-
-            }
-        });
+        repository = RepositoryImpl.getInstance(getContext());
         return binding.getRoot();
     }
 
@@ -91,17 +91,29 @@ public class CompanyListFragment extends Fragment {
     }
 
 
-    public  void sendToDetailActivity(Company item) {
-        Intent intent = new Intent();
-        intent.putExtra(COMPANY_EXTRA, item);
-        CompanyDetailActivity.startForResult(getActivity(),EXTRA_RC, item);
-    }
-
     public void onItemClick(View view, Object item, int position){
         sendToDetailActivity((Company) item);
     }
 
     public void onItemLongClick(View view, Object item, int position){
-        sendToDetailActivity((Company) item);
+        deleteCompany((Company) item);
+    }
+
+    private void deleteCompany(Company item) {
+        Single<Integer> result = Single.create(emitter -> emitter.onSuccess(repository.deleteCompany(item)));
+        result.observeOn(AndroidSchedulers.mainThread()).
+                subscribeOn(Schedulers.io()).
+                subscribe(this::sendMessage);
+    }
+
+    public void sendMessage(Integer result){
+        Toast.makeText(getContext(), "Contact deleted", Toast.LENGTH_SHORT).show();
+    }
+
+
+    public  void sendToDetailActivity(Company item) {
+        Intent intent = new Intent();
+        intent.putExtra(COMPANY_EXTRA, item);
+        CompanyDetailActivity.startForResult(getActivity(),EXTRA_RC, item);
     }
 }

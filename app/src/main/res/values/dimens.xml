@@ -3,4 +3,8 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">10dp</dimen>
     <dimen name="activity_horizontal_margin">10dp</dimen>
+    <dimen name="small_margin_8dp">8dp</dimen>
+    <dimen name="medium_margin_16dp">16dp</dimen>
+    <dimen name="CompanyNameTextSize">18sp</dimen>
+    <dimen name="big_magin_17dp">17dp</dimen>
 </resources>

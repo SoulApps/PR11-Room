@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_COMPANY_FRAGMENT = "TAG_COMPANY_FRAGMENT";
     private static final int EXTRA_RC = 2;
     private MainActivityViewModel mViewModel;
-    // todo solve load error
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

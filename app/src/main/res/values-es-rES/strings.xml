@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gestor de compañías</string>
+    <string name="action_settings">Opciones</string>
+    <string name="title_activity_company_detail">Compañía</string>
+    <string name="company_image_contentDescription">imagen de la compañía</string>
+    <string name="company_detail_content_txtURLHint">url del logo</string>
+    <string name="company_detail_content_txtEmailHint">Email</string>
+    <string name="company_detail_content_txtPhoneHint">Teléfono</string>
+    <string name="company_detail_content_txtAddress">Dirección</string>
+    <string name="company_detail_content_txtCIFHint">CIF</string>
+    <string name="company_detail_content_txtCompanyNameHint">Nombre de la compañía</string>
+    <string name="company_detail_content_txtContactHint">Persona de contacto</string>
+    <string name="empty_view_EmptyText">Lo sentimos, no hay compañías en la lista. Por favor, añada una</string>
+</resources>

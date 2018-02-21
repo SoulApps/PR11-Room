@@ -32,13 +32,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
     private Company company;
     private Intent intent;
     private Repository mRepository;
-    private MainActivityViewModel mViewModel;
-    //todo traducir
-    // todo comentar codigo
-    // todo limpiar codigo
-    // todo eliminar
-    // todo editar
-    // todo emptyView
     ActivityCompanyDetailBinding mBinding;
 
     @Override
@@ -53,7 +46,6 @@ public class CompanyDetailActivity extends AppCompatActivity {
     }
 
     private void obtainDBData() {
-        mViewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         mRepository = RepositoryImpl.getInstance(this);
     }
 
@@ -88,23 +80,41 @@ public class CompanyDetailActivity extends AppCompatActivity {
             }
         } else {
             // else we will edit the user
+            if(ValidationUtils.checkEmpty(mBinding)){
+                // If texts are not empty and validated
+                comp = new Company(mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtCpmpanyName.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtCIF.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtAddress.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtPhone.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtEmail.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtURL.getText().toString(),
+                        mBinding.contentCompanyDetailInclude.contentCompanyDetailTxtContact.getText().toString());
+                company = comp;
+                editCompany(comp);
+            }
         }
 
+    }
+
+    private void editCompany(Company comp) {
+        Single<Integer> result = Single.create(emitter -> emitter.onSuccess(mRepository.updateCompany(comp)));
+        result.observeOn(AndroidSchedulers.mainThread()).
+                subscribeOn(Schedulers.io()).
+                subscribe(this::endActivity);
     }
 
     private void insertCompany(Company comp) {
        Single<Long> result = Single.create(emitter -> emitter.onSuccess(mRepository.addCompany(comp)));
        result.observeOn(AndroidSchedulers.mainThread()).
-               subscribeOn(Schedulers.io()).
-               subscribe(this::checkInsert);
+                subscribeOn(Schedulers.io()).
+                subscribe(this::endActivity);
     }
 
 
-    private void checkInsert(long result){
+    private void endActivity(Object result){
         this.finish();
     }
 
-    // Método estático para iniciar la actividad (esperando un resultado).
     public static void startForResult(Activity activity, int requestCode, Company company) {
         Intent intent;
         intent = new Intent(activity, CompanyDetailActivity.class);

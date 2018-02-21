@@ -20,7 +20,7 @@ import io.reactivex.Observable;
  * Created by Mc_Ra on 14/02/2018.
  */
 
-public class RepositoryImpl implements Repository{
+public class RepositoryImpl implements Repository {
 
     private static RepositoryImpl instance;
     private final AppDatabase db;
@@ -49,10 +49,6 @@ public class RepositoryImpl implements Repository{
         return db.companyDao().getCompanies();
     }
 
-    @Override
-    public LiveData<Company> getCompany(long companyId) {
-        return db.companyDao().getCompany(companyId);
-    }
 
     @Override
     public long addCompany(Company company) {
